@@ -1,0 +1,10 @@
+.DS_Store
+config/databases.yml
+data/sql/*
+tmp/**/*
+cache/*
+log/*
+logs/*
+
+public/uploads/**/*
+public/uploads/*
