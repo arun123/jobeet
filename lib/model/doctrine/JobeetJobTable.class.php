@@ -26,6 +26,7 @@ class JobeetJobTable extends Doctrine_Table
 	{
 	return $this->addActiveJobsQuery($q)->count();
 	}
+
 	public function addActiveJobsQuery(Doctrine_Query $q = null)
 	{
 	if (is_null($q))
