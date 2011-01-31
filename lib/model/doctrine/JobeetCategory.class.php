@@ -12,5 +12,13 @@
  */
 class JobeetCategory extends BaseJobeetCategory
 {
+	
+public function getActiveJobs()
+{
+$q = Doctrine_Query::create()
+->from('JobeetJob j')
+->where('j.category_id = ?', $this->getId());
+return Doctrine_Core::getTable('JobeetJob')->getActiveJobs($q);
+}
 
 }

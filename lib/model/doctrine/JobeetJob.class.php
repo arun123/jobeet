@@ -12,6 +12,21 @@
  */
 class JobeetJob extends BaseJobeetJob
 {
+	// lib/model/doctrine/JobeetJob.class.php
+public function getCompanySlug()
+{
+return Jobeet::slugify($this->getCompany());
+}
+public function getPositionSlug()
+{
+return Jobeet::slugify($this->getPosition());
+}
+public function getLocationSlug()
+{
+return Jobeet::slugify($this->getLocation());
+}
+	
+	
 public function save(Doctrine_Connection $conn = null)
 {
 if ($this->isNew() && !$this->getExpiresAt())
