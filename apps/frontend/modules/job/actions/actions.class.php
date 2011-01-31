@@ -12,11 +12,7 @@ class jobActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $q = Doctrine_Query::create()
-->from('JobeetJob j')
-->where('j.created_at > ?',
-date('Y-m-d H:i:s', time() - 86400 * 30));
- $this->jobeetjobs = $q->execute();
+$this->jobeetjobs =Doctrine_Core::getTable('JobeetJob')->getActiveJobs();
   }
 
   public function executeShow(sfWebRequest $request)
