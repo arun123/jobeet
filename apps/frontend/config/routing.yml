@@ -1,6 +1,12 @@
 # apps/frontend/config/routing.yml
 # default rules
-
+# apps/frontend/config/routing.yml
+category:
+  url:      /category/:slug
+  class:    sfDoctrineRoute
+  param:    { module: category, action: show }
+  options:  { model: JobeetCategory, type: object }
+  
 job:
  class: sfDoctrineRouteCollection
  options: { model: JobeetJob }

@@ -21,4 +21,12 @@ $q = Doctrine_Query::create()
 return Doctrine_Core::getTable('JobeetJob')->getActiveJobs($q);
 }
 
+public function countActiveJobs()
+{
+  $q = Doctrine_Query::create()
+    ->from('JobeetJob j')
+    ->where('j.category_id = ?', $this->getId());
+ 
+  return Doctrine_Core::getTable('JobeetJob')->countActiveJobs($q);
+}
 }
