@@ -22,7 +22,7 @@ alt="Jobeet Job Board" />
 <div class="post">
 <h2>Ask for people</h2>
 <div>
-<a href="<?php echo url_for('job/index') ?>">Post a Job</a>
+<a href="<?php echo url_for('job_new') ?>">Post a Job</a>
 </div>
 </div>
 <div class="search">
