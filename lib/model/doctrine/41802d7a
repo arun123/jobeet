@@ -13,22 +13,7 @@
 class JobeetJob extends BaseJobeetJob
 {
 	// lib/model/doctrine/JobeetJob.class.php
-  public function extend($force = false)
-  {
-    if (!$force && !$this->expiresSoon())
-    {
-      return false;
-    }
- 
-    $this->setExpiresAt(date('Y-m-d', time() + 86400 * sfConfig::get('app_active_days')));
-    $this->save();
- 
-    return true;
-  }
-
-	
-	
-	public function getCompanySlug()
+  public function getCompanySlug()
   {
   return Jobeet::slugify($this->getCompany());
   }
@@ -43,7 +28,6 @@ class JobeetJob extends BaseJobeetJob
 	
 	public function getTypeName()
   {
-    
   $types = Doctrine_Core::getTable('JobeetJob')->getTypes();
   return $this->getType() ? $types[$this->getType()] : '';
   }
@@ -57,11 +41,7 @@ class JobeetJob extends BaseJobeetJob
   {
   return $this->getDaysBeforeExpires() < 5;
   }
-  public function publish()
- {
-  $this->setIsActivated(true);
-  $this->save();
- }
+ 
   public function getDaysBeforeExpires()
   {
   return ceil(($this->getDateTimeObject('expires_at')->format('U') - time()) / 86400);
