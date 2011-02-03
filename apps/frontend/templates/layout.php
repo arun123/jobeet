@@ -1,4 +1,7 @@
 <!-- apps/frontend/templates/layout.php -->
+<link rel="alternate" type="application/atom+xml" title="Latest Jobs"
+  href="<?php echo url_for('job', array('sf_format' => 'atom'), true) ?>" />
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -14,6 +17,7 @@
 <div id="container">
 <div id="header">
 <div class="content">
+  
 <h1><a href="<?php echo url_for('job/index') ?>">
 <img src="http://www.symfony-project.org/images/logo.jpg"
 alt="Jobeet Job Board" />
@@ -40,6 +44,13 @@ Enter some keywords (city, country, position, ...)
 </div>
 </div>
 <div id="content">
+  <?php if ($sf_user->hasFlash('notice')): ?>
+  <div class="flash_notice"><?php echo $sf_user->getFlash('notice') ?></div>
+<?php endif ?>
+ 
+<?php if ($sf_user->hasFlash('error')): ?>
+  <div class="flash_error"><?php echo $sf_user->getFlash('error') ?></div>
+<?php endif ?>
 <?php if ($sf_user->hasFlash('notice')): ?>
 <div class="flash_notice">
 <?php echo $sf_user->getFlash('notice') ?>
@@ -50,6 +61,19 @@ Enter some keywords (city, country, position, ...)
 <?php echo $sf_user->getFlash('error') ?>
 </div>
 <?php endif ?>
+
+
+<div id="job_history">
+  Recent viewed jobs:
+  <ul>
+    <?php foreach ($sf_user->getJobHistory() as $job): ?>
+      <li>
+        <?php echo link_to($job->getPosition().' - '.$job->getCompany(), 'job_show_user', $job) ?>
+      </li>
+    <?php endforeach ?>
+  </ul>
+</div>
+
 <div class="content">
 <?php echo $sf_content ?>
 </div>
@@ -66,7 +90,8 @@ alt="symfony framework" />
 </span>
 <ul>
 <li><a href="">About Jobeet</a></li>
-<li class="feed"><a href="">Full feed</a></li>
+<li class="feed"><a href="<?php echo url_for('job', array('sf_format' => 'atom')) ?>">Full feed</a>
+</li>
 <li><a href="">Jobeet API</a></li>
 <li class="last"><a href="">Affiliates</a></li>
 </ul>

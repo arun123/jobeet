@@ -17,7 +17,7 @@
           </a>
         </h1>
       </div>
- 
+ <?php if ($sf_user->isAuthenticated()): ?>
       <div id="menu">
         <ul>
           <li>
@@ -26,9 +26,12 @@
           <li>
             <?php echo link_to('Categories', 'jobeet_category') ?>
           </li>
-        </ul>
+          <li><?php echo link_to('Users', 'sf_guard_user') ?></li>
+          <li><?php echo link_to('Logout', 'sf_guard_signout') ?></li>
+         </ul>
       </div>
- 
+ <?php endif ?>
+
       <div id="content">
         <?php echo $sf_content ?>
       </div>
