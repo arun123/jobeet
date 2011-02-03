@@ -7,13 +7,16 @@
  * 
  * @property string $name
  * @property Doctrine_Collection $JobeetJobs
+ * @property Doctrine_Collection $JobeetAffiliates
  * @property Doctrine_Collection $JobeetCategoryAffiliate
  * 
  * @method string              getName()                    Returns the current record's "name" value
  * @method Doctrine_Collection getJobeetJobs()              Returns the current record's "JobeetJobs" collection
+ * @method Doctrine_Collection getJobeetAffiliates()        Returns the current record's "JobeetAffiliates" collection
  * @method Doctrine_Collection getJobeetCategoryAffiliate() Returns the current record's "JobeetCategoryAffiliate" collection
  * @method JobeetCategory      setName()                    Sets the current record's "name" value
  * @method JobeetCategory      setJobeetJobs()              Sets the current record's "JobeetJobs" collection
+ * @method JobeetCategory      setJobeetAffiliates()        Sets the current record's "JobeetAffiliates" collection
  * @method JobeetCategory      setJobeetCategoryAffiliate() Sets the current record's "JobeetCategoryAffiliate" collection
  * 
  * @package    jobeet
@@ -39,6 +42,11 @@ abstract class BaseJobeetCategory extends sfDoctrineRecord
         $this->hasMany('JobeetJob as JobeetJobs', array(
              'local' => 'id',
              'foreign' => 'category_id'));
+
+        $this->hasMany('JobeetAffiliate as JobeetAffiliates', array(
+             'refClass' => 'JobeetCategoryAffiliate',
+             'local' => 'category_id',
+             'foreign' => 'affiliate_id'));
 
         $this->hasMany('JobeetCategoryAffiliate', array(
              'local' => 'id',

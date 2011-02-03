@@ -39,11 +39,11 @@ JobeetAffiliate:
   is_active: { type: boolean, notnull: true, default: 0 }
  relations:
   JobeetCategories:
-  class: JobeetCategory
-  refClass: JobeetCategoryAffiliate
-  local: affiliate_id
-  foreign: category_id
-  foreignAlias: JobeetAffiliates
+   class: JobeetCategory
+   refClass: JobeetCategoryAffiliate
+   local: affiliate_id
+   foreign: category_id
+   foreignAlias: JobeetAffiliates
 
 JobeetCategoryAffiliate:
  columns:

@@ -9,17 +9,20 @@
  * @property string $email
  * @property string $token
  * @property boolean $is_active
+ * @property Doctrine_Collection $JobeetCategories
  * @property Doctrine_Collection $JobeetCategoryAffiliate
  * 
  * @method string              getUrl()                     Returns the current record's "url" value
  * @method string              getEmail()                   Returns the current record's "email" value
  * @method string              getToken()                   Returns the current record's "token" value
  * @method boolean             getIsActive()                Returns the current record's "is_active" value
+ * @method Doctrine_Collection getJobeetCategories()        Returns the current record's "JobeetCategories" collection
  * @method Doctrine_Collection getJobeetCategoryAffiliate() Returns the current record's "JobeetCategoryAffiliate" collection
  * @method JobeetAffiliate     setUrl()                     Sets the current record's "url" value
  * @method JobeetAffiliate     setEmail()                   Sets the current record's "email" value
  * @method JobeetAffiliate     setToken()                   Sets the current record's "token" value
  * @method JobeetAffiliate     setIsActive()                Sets the current record's "is_active" value
+ * @method JobeetAffiliate     setJobeetCategories()        Sets the current record's "JobeetCategories" collection
  * @method JobeetAffiliate     setJobeetCategoryAffiliate() Sets the current record's "JobeetCategoryAffiliate" collection
  * 
  * @package    jobeet
@@ -58,6 +61,11 @@ abstract class BaseJobeetAffiliate extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('JobeetCategory as JobeetCategories', array(
+             'refClass' => 'JobeetCategoryAffiliate',
+             'local' => 'affiliate_id',
+             'foreign' => 'category_id'));
+
         $this->hasMany('JobeetCategoryAffiliate', array(
              'local' => 'id',
              'foreign' => 'affiliate_id'));
