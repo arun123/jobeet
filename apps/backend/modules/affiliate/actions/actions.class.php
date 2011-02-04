@@ -13,8 +13,10 @@ require_once dirname(__FILE__).'/../lib/AffiliateGeneratorHelper.class.php';
  */
 class affiliateActions extends autoAffiliateActions
 {
+  
  public function executeListActivate()
   {
+    
     $affiliate = $this->getRoute()->getObject();
     $affiliate->activate();
  
