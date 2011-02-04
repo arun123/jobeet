@@ -21,12 +21,16 @@ test:
     web_debug:              false
     no_script_name:         false
     etag:                   false
+   
 
 all:
   .settings:
+    default_culture: en
     # Form security secret (CSRF protection)
     csrf_secret:            8739bb0a1eb891a5c9862ecfb5b9872efda5759f
-
+    standard_helpers: [Partial, Cache, I18N]
+    i18n: true
+    charset: utf-8
     # Output escaping settings
     escaping_strategy:      true
     escaping_method:        ESC_SPECIALCHARS

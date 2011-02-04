@@ -1,16 +1,32 @@
 # apps/frontend/config/routing.yml
 # default rules
 # apps/frontend/config/routing.yml
+
+change_language:
+  url:   /change_language
+  param: { module: language, action: changeLanguage }
+
+localized_homepage:
+  url:   /:sf_culture/
+  param: { module: job, action: index }
+  requirements:
+    sf_culture: (?:fr|en)
+
 job_search:
-  url:   /search
+  url:   /:sf_culture/search
   param: { module: job, action: search }
-  
+  requirements:
+    sf_culture: (?:fr|en)
+    
 affiliate:
   class:   sfDoctrineRouteCollection
   options:
     model: JobeetAffiliate
     actions: [new, create]
     object_actions: { wait: get }
+    prefix_path:    /:sf_culture/affiliate
+  requirements:
+    sf_culture: (?:fr|en) 
     
 api_jobs:
   url:     /api/:token/jobs.:sf_format
@@ -21,12 +37,13 @@ api_jobs:
     sf_format: (?:xml|json|yaml)
     
 category:
-  url:     /category/:slug.:sf_format
+  url:     /:sf_culture/category/:slug.:sf_format
   class:   sfDoctrineRoute
   param:   { module: category, action: show, sf_format: html }
   options: { model: JobeetCategory, type: object }
   requirements:
     sf_format: (?:html|atom)
+    sf_culture: (?:fr|en)
     
 job:
   class:   sfDoctrineRouteCollection
@@ -34,11 +51,12 @@ job:
     model:          JobeetJob
     column:         token
     object_actions: { publish: put }
+    prefix_path:    /:sf_culture/job
   requirements:
     token: \w+
 
 job_show_user:
- url: /job/:company_slug/:location_slug/:id/:position_slug
+ url: /:sf_culture/job/:company_slug/:location_slug/:id/:position_slug
  class: sfDoctrineRoute
  options:
   model: JobeetJob

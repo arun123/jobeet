@@ -42,10 +42,26 @@ class jobActions extends sfActions
   }
 }
 
-  public function executeIndex(sfWebRequest $request)
-  { 
-    $this->categories =Doctrine_Core::getTable('JobeetCategory')->getWithJobs();
+ public function executeIndex(sfWebRequest $request)
+{
+  if (!$request->getParameter('sf_culture'))
+  {
+    if ($this->getUser()->isFirstRequest())
+    {
+      $culture = $request->getPreferredCulture(array('en', 'fr'));
+      $this->getUser()->setCulture($culture);
+      $this->getUser()->isFirstRequest(false);
+    }
+    else
+    {
+      $culture = $this->getUser()->getCulture();
+    }
+ 
+    $this->redirect('localized_homepage');
   }
+ 
+  $this->categories = Doctrine_Core::getTable('JobeetCategory')->getWithJobs();
+}
 
    public function executeShow(sfWebRequest $request)
   {

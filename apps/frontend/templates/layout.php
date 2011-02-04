@@ -81,26 +81,28 @@ alt="Jobeet Job Board" />
 </div>
 </div>
 <div id="footer">
-<div class="content">
-<span class="symfony">
-<img src="http://www.symfony-project.org/images/
-jobeet-mini.png" />
-powered by <a href="http://www.symfony-project.org/">
-<img src="http://www.symfony-project.org/images/symfony.gif"
-alt="symfony framework" />
-</a>
-</span>
-<ul>
-<li><a href="">About Jobeet</a></li>
-<li class="feed"><a href="<?php echo url_for('job', array('sf_format' => 'atom')) ?>">Full feed</a>
-</li>
-<li><a href="">Jobeet API</a></li>
-<li class="last">
-  <a href="<?php echo url_for('affiliate_new') ?>">Become an affiliate</a>
-</li>
-</ul>
-</div>
-</div>
+  <div class="content">
+    <span class="symfony">
+      <img src="/images/jobeet-mini.png" />
+      powered by <a href="http://www.symfony-project.org/">
+      <img src="/images/symfony.gif" alt="symfony framework" /></a>
+    </span>
+    <ul>
+      <li>
+        <a href=""><?php echo __('About Jobeet') ?></a>
+      </li>
+      <li class="feed">
+        <?php echo link_to(__('Full feed'), 'job', array('sf_format' => 'atom')) ?>
+      </li>
+      <li>
+        <a href=""><?php echo __('Jobeet API') ?></a>
+      </li>
+      <li class="last">
+        <?php echo link_to(__('Become an affiliate'), 'affiliate_new') ?>
+      </li>
+    </ul>
+    <?php include_component('language', 'language') ?>
+  </div>
 </div>
 </body>
 </html>
